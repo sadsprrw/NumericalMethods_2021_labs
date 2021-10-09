@@ -1,5 +1,6 @@
 import math
 import numpy
+import sympy
 
 
 def function(x):
@@ -24,7 +25,7 @@ def results_output(results):
 
 
 def dichotomy_method(a, b, eps):
-    n = int(math.log2((b - a) / eps))
+    n = int(math.log2((b - a) / eps)) + 1
     results = []
     x = (a + b) / 2
     fx = function(x)
@@ -57,11 +58,21 @@ def dichotomy_method(a, b, eps):
     print("---------------------------------------------------------")
 
 
+def find_max(x1, x2):
+    maximum = 0
+    i = x1
+    while i < x2:
+        maximum = function_d(i) if function_d(i) > maximum else maximum
+        i += 0.001
+    return maximum
+
+
 def relaxation_method(a, b, eps):
     fda = abs(function_d(a))
     fdb = abs(function_d(b))
     min1 = fdb if fda > fdb else fda
-    max1 = fda if fda > fdb else fdb
+    max1 = math.ceil(find_max(a, b))
+    print("Min: ", min1, "Max: ", max1)
     x = a
     prev = 100
     z0 = abs(x)
@@ -71,7 +82,7 @@ def relaxation_method(a, b, eps):
     fx = function(x)
 
     results = [[x, to_fixed(fx)]]
-    while abs(x - prev) >= 2*eps:
+    while abs(prev - x) >= eps:
         prev = x
         x = prev - t0 * function(prev)
         fx = function(x)
