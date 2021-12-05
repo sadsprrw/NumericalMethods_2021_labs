@@ -62,6 +62,8 @@ for i in range(len(xn)):
 
 nInterpolation = eval(nInterpolationStr)
 lInterpolation = eval(lInterpolationStr)
+print(lInterpolationStr, "\n")
+print(nInterpolationStr, "\n")
 xi = np.linspace(-3.5, 4, 1000)
 fig, axis = plt.subplots(2)
 axis[0].plot(xi, lInterpolation(xi))
