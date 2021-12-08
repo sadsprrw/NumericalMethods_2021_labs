@@ -68,6 +68,5 @@ for i in range(len(pairs)):
   y_hat = [L(x, i + 1) for x in x_hat]
   plt.plot(x_hat, y_hat)
 plt.show()
-
 plt.plot(xx, yy)
 plt.show()
